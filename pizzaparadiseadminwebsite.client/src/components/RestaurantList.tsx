@@ -11,20 +11,25 @@ export default function RestaurantList({restaurants}: RestaurantListProps) {
   const descendingSort: GridSortDirection[] = ['desc', 'asc', null];
 
   const columns: GridColDef[] = [
-    {field: 'id', headerName: 'Id'},
-    {field: 'name', headerName: 'Restaurant', sortingOrder: ascendingSort, flex: 20},
-    {field: 'phone', headerName: 'Phone Number', sortingOrder: ascendingSort, flex: 40},
+    {field: 'Id', headerName: 'Id'},
+    {field: 'Name', headerName: 'Restaurant', sortingOrder: ascendingSort, flex: 20},
+    {field: 'PhoneNumber', headerName: 'Phone Number', sortingOrder: ascendingSort, flex: 40},
   ]
+
+  function getRowId(row: Restaurant) : number {
+    return row.Id;
+  }
 
   return (
     <Box sx={{width:'100%'}}>
       <DataGrid
         rows={restaurants}
         columns={columns}
+        getRowId={getRowId}
         initialState={{
           columns: {
             columnVisibilityModel: {
-              id: false,
+              Id: false,
             },
           },
           sorting: {
