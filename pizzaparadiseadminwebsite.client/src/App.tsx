@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import { Toolbar, Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 interface Forecast {
     date: string;
@@ -41,15 +40,7 @@ function App() {
 
     return (
         <div>
-            <AppBar position='sticky'>
-                <Toolbar variant="dense">
-                    <Typography variant="h6" color="inherit" component="div">
-                        Admin portal
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-
-            <h1 id="tabelLabel">Weather forecast</h1>
+            <Typography variant="h4" gutterBottom>Accounts</Typography>
             <p>This component demonstrates fetching data from the server.</p>
             {contents}
         </div>

@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import TabLayout from './TabLayout.tsx'
+import HeaderBar from './HeaderBar.tsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <HeaderBar />
+    <TabLayout />
   </React.StrictMode>,
 )
