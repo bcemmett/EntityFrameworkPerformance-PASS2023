@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import App from './App';
+import Restaurants from './Restaurants';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -58,7 +59,7 @@ export default function TabLayout() {
         <App />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+        <Restaurants />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         Item Three
