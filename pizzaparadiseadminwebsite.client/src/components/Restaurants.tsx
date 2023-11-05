@@ -1,13 +1,24 @@
+import { useState, useEffect } from 'react';
 import { Restaurant } from '../models/Restaurant';
 import RestaurantList from './RestaurantList';
 
 export default function Restaurants() {
-    var restaurants : Restaurant[] = [
-        { id: 1, name: 'Restaurant 1', phone: '0123456789' },
-        { id: 2, name: 'Restaurant 2', phone: '3456789012' },
-        { id: 3, name: 'Restaurant 3', phone: '6789012345' },
-    ];
+    const [restaurants, setRestaurants] = useState<Restaurant[]>();
+
+    useEffect(() => {
+        getRestaurants();
+    }, []);
+
+    async function getRestaurants() {
+        const response = await fetch('api/restaurant/list-restaurants');
+        const data = await response.json();
+        setRestaurants(data);
+    }
+
     return (
-        <RestaurantList restaurants={restaurants}/>
+        <>
+          {!restaurants && <div>Loading...</div>}
+          {restaurants && <RestaurantList restaurants={restaurants}/>}
+        </>
     );
 }
