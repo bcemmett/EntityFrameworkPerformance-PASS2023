@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34219.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaParadiseAdminWebsite.Server", "PizzaParadiseAdminWebsite.Server\PizzaParadiseAdminWebsite.Server.csproj", "{F61F40CB-C22C-4825-9062-6E052A69D85F}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "pizzaparadiseadminwebsite.client", "pizzaparadiseadminwebsite.client\pizzaparadiseadminwebsite.client.esproj", "{2FE20E60-7C08-428D-BF6F-09EC4FC2E2CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F61F40CB-C22C-4825-9062-6E052A69D85F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61F40CB-C22C-4825-9062-6E052A69D85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61F40CB-C22C-4825-9062-6E052A69D85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61F40CB-C22C-4825-9062-6E052A69D85F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FE20E60-7C08-428D-BF6F-09EC4FC2E2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FE20E60-7C08-428D-BF6F-09EC4FC2E2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FE20E60-7C08-428D-BF6F-09EC4FC2E2CE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2FE20E60-7C08-428D-BF6F-09EC4FC2E2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FE20E60-7C08-428D-BF6F-09EC4FC2E2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FE20E60-7C08-428D-BF6F-09EC4FC2E2CE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14CF36F9-6F02-4EE7-91D5-D6555343F51E}
+	EndGlobalSection
+EndGlobal
