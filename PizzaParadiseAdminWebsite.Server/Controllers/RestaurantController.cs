@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using PizzaParadiseAdminWebsite.Server.Models;
-using PizzaParadiseAdminWebsite.Server;
 
 namespace PizzaParadiseAdminWebsite.Server.Controllers
 {
@@ -19,9 +18,13 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
 
         [HttpGet]
         [Route("list-restaurants")]
-        public IEnumerable<Restaurant> Get()
+        public IEnumerable<Restaurant> Get([FromQuery] PageModel pageModel)
         {
-            return _db.Restaurants.ToList();            
+            return _db.Restaurants
+                .OrderBy(x => x.Id)
+                .Skip(pageModel.PageSize * pageModel.Page)
+                .Take(pageModel.PageSize)
+                .ToList();
         }
     }
 }
