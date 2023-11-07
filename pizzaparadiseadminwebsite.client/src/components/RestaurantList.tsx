@@ -5,12 +5,11 @@ import { Box } from '@mui/material';
 
 interface RestaurantListProps{
     restaurants: Restaurant[];
-    pageModel: GridPaginationModel;
     totalRowCount: number;
     onChangePage: (pageModel: GridPaginationModel) => void;
 }
 
-export default function RestaurantList({restaurants, pageModel, totalRowCount, onChangePage}: RestaurantListProps) {
+export default function RestaurantList({restaurants, totalRowCount, onChangePage}: RestaurantListProps) {
   const ascendingSort: GridSortDirection[] = ['asc', 'desc', null];
   const descendingSort: GridSortDirection[] = ['desc', 'asc', null];
 
@@ -20,9 +19,20 @@ export default function RestaurantList({restaurants, pageModel, totalRowCount, o
     {field: 'PhoneNumber', headerName: 'Phone Number', sortingOrder: ascendingSort, flex: 40},
   ]
 
+  const pageSizeOptions = [10, 20];
+
   const [rowCountState, setRowCountState] = useState(
     totalRowCount || 0,
   );
+
+  const [pageModel, setPageModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: pageSizeOptions[0],
+  });
+
+  useEffect(() => {
+    onChangePage(pageModel);
+  }, [pageModel]);
 
   useEffect(() => {
     setRowCountState((prevRowCountState) =>
@@ -44,9 +54,9 @@ export default function RestaurantList({restaurants, pageModel, totalRowCount, o
         getRowId={getRowId}
         rowCount={rowCountState}
         paginationMode='server'
-        pageSizeOptions={[10, 20]}
+        pageSizeOptions={pageSizeOptions}
         paginationModel={pageModel}
-        onPaginationModelChange={onChangePage}
+        onPaginationModelChange={setPageModel}
         initialState={{
           columns: {
             columnVisibilityModel: {
