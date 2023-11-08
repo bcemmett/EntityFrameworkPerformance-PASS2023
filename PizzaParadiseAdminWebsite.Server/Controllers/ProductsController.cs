@@ -32,5 +32,16 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
                 ProductCount = c.Products.Count(),
             });
         }
+
+        [HttpGet]
+        [Route("list-products")]
+        public IEnumerable<Product> GetProducts([FromQuery] PageModel pageModel)
+        {
+            return _db.Products
+                .OrderBy(x => x.Id)
+                .Skip(pageModel.PageSize * pageModel.Page)
+                .Take(pageModel.PageSize)
+                .ToList();
+        }
     }
 }

@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace PizzaParadiseAdminWebsite.Server.Models
 {
     public class Product
@@ -8,6 +10,8 @@ namespace PizzaParadiseAdminWebsite.Server.Models
         public string? CurrentPrice { get; set; }
         public bool Available { get; set; }
         public int CategoryId { get; set; }
+        
+        [JsonIgnore]
         public virtual Category Category { get; set; }
     }
 }

@@ -4,5 +4,4 @@ export interface Product {
     Description: string;
     CurrentPrice: string;
     Available: boolean;
-    CategoryId: number;
 }
