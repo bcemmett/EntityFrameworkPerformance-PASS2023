@@ -16,7 +16,7 @@ export default function ProductsTab() {
             page: pageModel?.page.toString(),
             pageSize: pageModel?.pageSize.toString(),
         });
-        const response = await fetch('api/category/list-categories?' + queryParams);
+        const response = await fetch('api/products/list-categories?' + queryParams);
         const data = await response.json();
         setCategories(data);
     }
