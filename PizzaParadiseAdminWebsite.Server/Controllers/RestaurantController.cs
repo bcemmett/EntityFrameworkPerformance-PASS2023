@@ -22,9 +22,9 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
         {
             return _db.Restaurants
                 .OrderBy(x => x.Id)
+                .ToList()
                 .Skip(pageModel.PageSize * pageModel.Page)
-                .Take(pageModel.PageSize)
-                .ToList();
+                .Take(pageModel.PageSize);                
         }
     }
 }
