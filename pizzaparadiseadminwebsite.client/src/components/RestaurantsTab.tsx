@@ -3,7 +3,7 @@ import { Restaurant } from '../models/Restaurant';
 import RestaurantList from './RestaurantList';
 import { GridPaginationModel } from '@mui/x-data-grid';
 
-export default function Restaurants() {
+export default function RestaurantsTab() {
     const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
     const [totalRowCount, setTotalRowCount] = useState<number>(62);
 

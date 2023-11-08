@@ -11,6 +11,7 @@ namespace PizzaParadiseAdminWebsite.Server
         }
 
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
