@@ -30,7 +30,7 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
             return categories.Select(c => new{
                 Id = c.Id,
                 Name = c.Name,
-                ProductCount = c.Products.First().Id,
+                ProductCount = c.Products.Count,
             });
         }
     }

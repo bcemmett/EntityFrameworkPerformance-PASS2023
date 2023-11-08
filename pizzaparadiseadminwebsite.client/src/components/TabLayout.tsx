@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import RestaurantsTab from './RestaurantsTab';
 import AccountsTab from './AccountsTab';
+import ProductsTab from './ProductsTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,7 +53,7 @@ export default function TabLayout() {
         <Tabs value={value} onChange={handleChange} aria-label="Main tab layout area">
           <Tab label="Restaurants" {...a11yProps(0)} />
           <Tab label="Accounts" {...a11yProps(1)} />
-          <Tab label="Orders" {...a11yProps(2)} />
+          <Tab label="Products" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -62,7 +63,7 @@ export default function TabLayout() {
         <AccountsTab />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <ProductsTab />
       </CustomTabPanel>
     </Box>
   );
