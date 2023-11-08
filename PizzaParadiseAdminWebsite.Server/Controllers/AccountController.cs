@@ -17,6 +17,19 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
             _db = db;
         }
 
+        [HttpPost]
+        [Route("search")]
+        public List<Account> Post([FromQuery] PageModel pageModel, [FromBody] AccountSearchModel searchModel)
+        {
+            return _db.Accounts
+                .Where(x => (x.Name == searchModel.Name || String.IsNullOrWhiteSpace(searchModel.Name))
+                && (x.Email == searchModel.Email || String.IsNullOrWhiteSpace(searchModel.Email)))
+                .OrderBy(x => x.Id)
+                .Skip(pageModel.PageSize * pageModel.Page)
+                .Take(pageModel.PageSize)
+                .ToList();
+        }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Account))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
