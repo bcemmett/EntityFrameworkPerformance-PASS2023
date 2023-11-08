@@ -12,10 +12,22 @@ namespace PizzaParadiseAdminWebsite.Server
 
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer();
+            optionsBuilder
+                .UseLazyLoadingProxies()
+                .UseSqlServer();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasOne(e => e.Category)
+                .WithMany(e => e.Products)
+                .HasForeignKey(e => e.CategoryId);
         }
     }
 }
