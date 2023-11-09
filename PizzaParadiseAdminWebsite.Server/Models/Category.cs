@@ -8,6 +8,6 @@ namespace PizzaParadiseAdminWebsite.Server.Models
         public string? Name { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Product> Products { get ;set; }
+        public virtual ICollection<Product>? Products { get ;set; }
     }
 }

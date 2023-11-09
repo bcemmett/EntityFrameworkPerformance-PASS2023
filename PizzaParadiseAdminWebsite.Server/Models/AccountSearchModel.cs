@@ -5,7 +5,7 @@ namespace PizzaParadiseAdminWebsite.Server.Models;
 public class AccountSearchModel : PageModel
 {
     [FromQuery(Name = "name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
     [FromQuery(Name = "email")]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 }

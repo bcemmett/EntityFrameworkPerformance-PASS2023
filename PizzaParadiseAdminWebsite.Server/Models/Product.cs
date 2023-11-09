@@ -13,6 +13,6 @@ namespace PizzaParadiseAdminWebsite.Server.Models
         public byte[]? Photo { get; set; }
         
         [JsonIgnore]
-        public virtual Category Category { get; set; }
+        public virtual Category? Category { get; set; }
     }
 }
