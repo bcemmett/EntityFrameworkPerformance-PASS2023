@@ -10,6 +10,7 @@ namespace PizzaParadiseAdminWebsite.Server.Models
         public string? CurrentPrice { get; set; }
         public bool Available { get; set; }
         public int CategoryId { get; set; }
+        public byte[]? Photo { get; set; }
         
         [JsonIgnore]
         public virtual Category Category { get; set; }
