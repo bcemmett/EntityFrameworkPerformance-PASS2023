@@ -19,7 +19,7 @@ export default function AccountList({accounts, totalRowCount, onChangePage}: Acc
     {field: 'Email', headerName: 'Email', sortingOrder: ascendingSort, flex: 40},
   ]
 
-  const pageSizeOptions = [10, 20];
+  const pageSizeOptions = [100];
 
   const [rowCountState, setRowCountState] = useState(
     totalRowCount || 0,

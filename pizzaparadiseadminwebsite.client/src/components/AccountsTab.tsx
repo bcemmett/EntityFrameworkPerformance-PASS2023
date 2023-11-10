@@ -9,7 +9,7 @@ import { GridPaginationModel } from '@mui/x-data-grid';
 export default function AccountsTab() {
     const [account, setAccount] = useState<Account>();
     const [accounts, setAccounts] = useState<Account[]>();
-    const [totalRowCount, setTotalRowCount] = useState<number>(1000);
+    const [totalRowCount, setTotalRowCount] = useState<number>(81);
     const [email, setEmail] = useState<string>('');
     const [searchModel, setSearchModel] = useState<AccountSearchModel>({Name: '', City: ''});
 
@@ -69,6 +69,7 @@ export default function AccountsTab() {
             <Grid container>
                 <Grid item xs={4}>
                     <TextField
+                        fullWidth
                         autoFocus
                         margin='dense'
                         label='Email'
@@ -78,13 +79,12 @@ export default function AccountsTab() {
                         onChange={syncEmailLookupModelToForm}
                     />
                 </Grid>
-                <Grid item xs={2} />
                 <Grid item xs={2} sx={{paddingTop: 2, paddingLeft: 5}}>
                     <Button onClick={getAccountByEmail} variant='contained' disabled={!email || email == ''}>Load account</Button>
                 </Grid>
             </Grid>
             <Grid container>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <TextField
                         autoFocus
                         margin='dense'
@@ -95,8 +95,9 @@ export default function AccountsTab() {
                         onChange={syncSearchModelToForm}
                     />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <TextField
+                        fullWidth
                         margin='dense'
                         label='City'
                         name='City'
