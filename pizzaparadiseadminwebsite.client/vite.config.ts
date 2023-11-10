@@ -49,6 +49,10 @@ export default defineConfig({
             '^/api': {
                 target: 'https://localhost:7296/',
                 secure: false
+            },
+            '^/profiler': {
+                target: 'https://localhost:7296/',
+                secure: false
             }
         },
         port: 5173,

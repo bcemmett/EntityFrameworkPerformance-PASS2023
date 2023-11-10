@@ -20,7 +20,16 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
+builder.Services.AddMiniProfiler(options =>
+{
+    options.RouteBasePath = "/profiler";
+    options.PopupRenderPosition = StackExchange.Profiling.RenderPosition.BottomRight;
+})
+.AddEntityFramework();
+
 var app = builder.Build();
+
+app.UseMiniProfiler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
