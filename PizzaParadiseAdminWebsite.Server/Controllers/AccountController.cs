@@ -1,4 +1,3 @@
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using PizzaParadiseAdminWebsite.Server.Models;
 
@@ -34,11 +33,15 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
         [Route("get-by-email")]
         public IActionResult Get(string email)
         {
-            var account = _db.Accounts
+            var accounts = _db.Accounts
                 .Where(x => x.Email == email)
-                .FirstOrDefault();
-            
-            return account == null ? NotFound() : Ok(account);
+                .ToList();
+
+            if(accounts.Any()){
+                return Ok(accounts.First());
+            } else {
+                return NotFound();
+            }
         }
     }
 }
