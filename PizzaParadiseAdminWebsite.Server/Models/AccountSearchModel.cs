@@ -6,6 +6,6 @@ public class AccountSearchModel : PageModel
 {
     [FromQuery(Name = "name")]
     public string? Name { get; set; }
-    [FromQuery(Name = "email")]
-    public string? Email { get; set; }
+    [FromQuery(Name = "city")]
+    public string? City { get; set; }
 }

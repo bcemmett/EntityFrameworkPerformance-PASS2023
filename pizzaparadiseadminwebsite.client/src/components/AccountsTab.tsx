@@ -11,7 +11,7 @@ export default function AccountsTab() {
     const [accounts, setAccounts] = useState<Account[]>();
     const [totalRowCount, setTotalRowCount] = useState<number>(1000);
     const [email, setEmail] = useState<string>('');
-    const [searchModel, setSearchModel] = useState<AccountSearchModel>({Name: '', Email: ''});
+    const [searchModel, setSearchModel] = useState<AccountSearchModel>({Name: '', City: ''});
 
     async function changePage(pageModel: GridPaginationModel){
         searchAccounts(pageModel);
@@ -79,7 +79,7 @@ export default function AccountsTab() {
                     />
                 </Grid>
                 <Grid item xs={2} />
-                <Grid item xs={2}>
+                <Grid item xs={2} sx={{paddingTop: 2, paddingLeft: 5}}>
                     <Button onClick={getAccountByEmail} variant='contained' disabled={!email || email == ''}>Load account</Button>
                 </Grid>
             </Grid>
@@ -98,15 +98,15 @@ export default function AccountsTab() {
                 <Grid item xs={3}>
                     <TextField
                         margin='dense'
-                        label='Email'
-                        name='Email'
+                        label='City'
+                        name='City'
                         variant='standard'
-                        value={searchModel?.Email}
+                        value={searchModel?.City}
                         onChange={syncSearchModelToForm}
                     />
                 </Grid>
-                <Grid item xs={2}>
-                    <Button onClick={loadAccountSearch} variant='contained' disabled={searchModel?.Name == '' && searchModel?.Email == ''}>Search accounts</Button>
+                <Grid item xs={2} sx={{paddingTop: 2, paddingLeft: 5}}>
+                    <Button onClick={loadAccountSearch} variant='contained' disabled={searchModel?.Name == '' && searchModel?.City == ''}>Search accounts</Button>
                 </Grid>
             </Grid>
             {account && <AccountDetails account={account}/>}

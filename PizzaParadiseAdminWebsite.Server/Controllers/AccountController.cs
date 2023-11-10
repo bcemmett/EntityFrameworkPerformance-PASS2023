@@ -19,15 +19,13 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
 
         [HttpPost]
         [Route("search")]
-        public List<Account> Post([FromQuery] PageModel pageModel, [FromBody] AccountSearchModel searchModel)
+        public IEnumerable<Account> Post([FromQuery] PageModel pageModel, [FromBody] AccountSearchModel searchModel)
         {
             return _db.Accounts
-                .Where(x => (x.Name == searchModel.Name || String.IsNullOrWhiteSpace(searchModel.Name))
-                && (x.Email == searchModel.Email || String.IsNullOrWhiteSpace(searchModel.Email)))
                 .OrderBy(x => x.Id)
-                .Skip(pageModel.PageSize * pageModel.Page)
-                .Take(pageModel.PageSize)
-                .ToList();
+                .ToList()
+                .Where(x => (x.Name == searchModel.Name || String.IsNullOrWhiteSpace(searchModel.Name))
+                    && (x.City == searchModel.City || String.IsNullOrWhiteSpace(searchModel.City)));
         }
 
         [HttpGet]

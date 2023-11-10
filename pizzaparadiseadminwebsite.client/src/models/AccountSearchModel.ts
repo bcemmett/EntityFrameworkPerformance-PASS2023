@@ -1,4 +1,4 @@
 export interface AccountSearchModel {
     Name: string;
-    Email: string;
+    City: string;
 }
