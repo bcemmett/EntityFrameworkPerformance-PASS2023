@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace PizzaParadiseAdminWebsite.Server.Models
+namespace PizzaParadiseAdminWebsite.Server.DbModel
 {
     public class Category
     {

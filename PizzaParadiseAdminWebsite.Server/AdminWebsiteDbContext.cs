@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PizzaParadiseAdminWebsite.Server.Models;
+using PizzaParadiseAdminWebsite.Server.DbModel;
 
 namespace PizzaParadiseAdminWebsite.Server
 {

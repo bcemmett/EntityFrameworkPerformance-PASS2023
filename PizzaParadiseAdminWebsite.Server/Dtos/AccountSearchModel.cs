@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace PizzaParadiseAdminWebsite.Server.Models;
+namespace PizzaParadiseAdminWebsite.Server.Dtos;
 
-public class AccountSearchModel : PageModel
+public class AccountSearchModel
 {
     [FromQuery(Name = "name")]
     public string? Name { get; set; }

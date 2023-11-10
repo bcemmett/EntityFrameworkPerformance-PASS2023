@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using PizzaParadiseAdminWebsite.Server.Models;
+using PizzaParadiseAdminWebsite.Server.DbModel;
+using PizzaParadiseAdminWebsite.Server.Dtos;
 
 namespace PizzaParadiseAdminWebsite.Server.Controllers
 {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace PizzaParadiseAdminWebsite.Server.Models;
+namespace PizzaParadiseAdminWebsite.Server.Dtos;
 
 public class PageModel {
     [FromQuery(Name = "page")]

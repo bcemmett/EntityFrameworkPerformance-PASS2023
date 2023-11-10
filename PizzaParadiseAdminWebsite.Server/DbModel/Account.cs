@@ -1,4 +1,4 @@
-namespace PizzaParadiseAdminWebsite.Server.Models
+namespace PizzaParadiseAdminWebsite.Server.DbModel
 {
     public class Account
     {
