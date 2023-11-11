@@ -8,6 +8,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
     <HeaderBar />
     <TabLayout />
-    {/*<Profiler />*/}
-  </>,
+    <Profiler />
+  </>
 )

@@ -24,6 +24,7 @@ builder.Services.AddMiniProfiler(options =>
 {
     options.RouteBasePath = "/profiler";
     options.PopupRenderPosition = StackExchange.Profiling.RenderPosition.BottomRight;
+    options.PopupStartHidden = true;
 })
 .AddEntityFramework();
 
