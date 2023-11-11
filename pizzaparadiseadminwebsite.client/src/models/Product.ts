@@ -2,6 +2,6 @@ export interface Product {
     Id: number;
     Name: string;
     Description: string;
-    CurrentPrice: string;
+    CurrentPrice: number;
     Available: boolean;
 }
