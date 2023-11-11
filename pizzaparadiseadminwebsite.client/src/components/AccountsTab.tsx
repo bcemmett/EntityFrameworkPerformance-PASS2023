@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AccountDetails from './AccountDetails';
 import { Account } from '../models/Account';
-import { Button, Grid, TextField } from '@mui/material';
+import { Button, Grid, TextField, Typography } from '@mui/material';
 import AccountList from './AccountList';
 import { AccountSearchModel } from '../models/AccountSearchModel';
 import { GridPaginationModel } from '@mui/x-data-grid';
@@ -66,6 +66,9 @@ export default function AccountsTab() {
 
     return (
         <>
+            <Typography variant="h4" color="inherit" component="div">
+                Customer account management
+            </Typography>
             <Grid container>
                 <Grid item xs={4}>
                     <TextField

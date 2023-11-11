@@ -1,12 +1,25 @@
 import { useState, useEffect } from 'react';
 import { Account } from '../models/Account';
 import { DataGrid, GridColDef, GridPaginationModel, GridSortDirection } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 interface AccountListProps{
     accounts: Account[];
     totalRowCount: number;
     onChangePage: (pageModel: GridPaginationModel) => void;
+}
+
+function RenderCellButton() {
+  return (
+    <strong>
+      <Button
+        size="small"
+        style={{ marginLeft: 16 }}
+      >
+        Load
+      </Button>
+    </strong>
+  );
 }
 
 export default function AccountList({accounts, totalRowCount, onChangePage}: AccountListProps) {
@@ -16,7 +29,10 @@ export default function AccountList({accounts, totalRowCount, onChangePage}: Acc
   const columns: GridColDef[] = [
     {field: 'Id', headerName: 'Id'},
     {field: 'Name', headerName: 'Name', sortingOrder: ascendingSort, flex: 20},
-    {field: 'Email', headerName: 'Email', sortingOrder: ascendingSort, flex: 40},
+    {field: 'Email', headerName: 'Email', sortingOrder: ascendingSort, flex: 20},
+    {field: 'City', headerName: 'City', sortingOrder: ascendingSort, flex: 20},
+    {field: 'Phone', headerName: 'Phone', sortingOrder: ascendingSort, flex: 20},
+    {field: 'a', headerName: '', sortingOrder: ascendingSort, flex: 20, renderCell: RenderCellButton},
   ]
 
   const pageSizeOptions = [100];
