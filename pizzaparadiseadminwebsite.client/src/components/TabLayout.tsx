@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import RestaurantsTab from './RestaurantsTab';
 import AccountsTab from './AccountsTab';
 import ProductsTab from './ProductsTab';
+import OrdersTab from './OrdersTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -54,6 +55,7 @@ export default function TabLayout() {
           <Tab label="Restaurants" {...a11yProps(0)} />
           <Tab label="Accounts" {...a11yProps(1)} />
           <Tab label="Products" {...a11yProps(2)} />
+          <Tab label="Orders" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -64,6 +66,9 @@ export default function TabLayout() {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         <ProductsTab />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+        <OrdersTab />
       </CustomTabPanel>
     </Box>
   );

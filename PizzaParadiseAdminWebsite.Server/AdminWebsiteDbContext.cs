@@ -14,6 +14,7 @@ namespace PizzaParadiseAdminWebsite.Server
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +29,16 @@ namespace PizzaParadiseAdminWebsite.Server
                 .HasOne(e => e.Category)
                 .WithMany(e => e.Products)
                 .HasForeignKey(e => e.CategoryId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(e => e.Account)
+                .WithMany(e => e.Orders)
+                .HasForeignKey(e => e.AccountId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(e => e.Restaurant)
+                .WithMany(e => e.Orders)
+                .HasForeignKey(e => e.RestaurantId);
         }
     }
 }

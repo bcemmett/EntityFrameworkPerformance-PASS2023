@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Account } from '../models/Account';
 import { DataGrid, GridColDef, GridPaginationModel, GridSortDirection } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
+import { Order } from '../models/Order';
 
-interface AccountListProps{
-    accounts: Account[];
+interface OrderListProps{
+    orders: Order[];
     totalRowCount: number;
     onChangePage: (pageModel: GridPaginationModel) => void;
 }
@@ -12,30 +12,27 @@ interface AccountListProps{
 function RenderCellButton() {
   return (
     <strong>
-      <Button
-        size="small"
-        style={{ marginLeft: 16 }}
-      >
-        Load
+      <Button size="small" style={{ marginLeft: 16 }}>
+        Manage
       </Button>
     </strong>
   );
 }
 
-export default function AccountList({accounts, totalRowCount, onChangePage}: AccountListProps) {
+export default function OrderList({orders, totalRowCount, onChangePage}: OrderListProps) {
   const ascendingSort: GridSortDirection[] = ['asc', 'desc', null];
   const descendingSort: GridSortDirection[] = ['desc', 'asc', null];
 
   const columns: GridColDef[] = [
     {field: 'Id', headerName: 'Id'},
-    {field: 'Name', headerName: 'Name', sortingOrder: ascendingSort, flex: 20},
-    {field: 'Email', headerName: 'Email', sortingOrder: ascendingSort, flex: 20},
-    {field: 'City', headerName: 'City', sortingOrder: ascendingSort, flex: 20},
-    {field: 'Phone', headerName: 'Phone', sortingOrder: ascendingSort, flex: 20},
+    {field: 'Restaurant', headerName: 'Restaurant', sortingOrder: ascendingSort, flex: 20},
+    {field: 'TimeReceived', headerName: 'Received', sortingOrder: ascendingSort, flex: 30},
+    {field: 'Total', headerName: 'Total', sortingOrder: ascendingSort, flex: 30},
+    {field: 'VoucherCode', headerName: 'Voucher', sortingOrder: ascendingSort, flex: 30},
     {field: 'x', headerName: '', sortingOrder: ascendingSort, flex: 20, renderCell: RenderCellButton},
   ]
 
-  const pageSizeOptions = [100];
+  const pageSizeOptions = [20, 50];
 
   const [rowCountState, setRowCountState] = useState(
     totalRowCount || 0,
@@ -58,14 +55,14 @@ export default function AccountList({accounts, totalRowCount, onChangePage}: Acc
     );
   }, [totalRowCount, setRowCountState]);
 
-  function getRowId(row: Account) : number {
+  function getRowId(row: Order) : number {
     return row.Id;
   }
 
   return (
     <Box sx={{width:'100%'}}>
       <DataGrid
-        rows={accounts}
+        rows={orders}
         columns={columns}
         getRowId={getRowId}
         rowCount={rowCountState}
@@ -74,13 +71,8 @@ export default function AccountList({accounts, totalRowCount, onChangePage}: Acc
         paginationModel={pageModel}
         onPaginationModelChange={setPageModel}
         initialState={{
-          columns: {
-            columnVisibilityModel: {
-              Id: false,
-            },
-          },
           sorting: {
-            sortModel: [{ field: 'Name', sort: 'desc' }],
+            sortModel: [{ field: 'Id', sort: 'desc' }],
           },
         }}
         density='compact'

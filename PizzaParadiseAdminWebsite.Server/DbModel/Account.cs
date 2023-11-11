@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace PizzaParadiseAdminWebsite.Server.DbModel
 {
     public class Account
@@ -11,5 +13,8 @@ namespace PizzaParadiseAdminWebsite.Server.DbModel
         public string? PostalCode { get; set; }
         public string? City { get; set; }
         public string? Phone { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Order>? Orders { get ;set; }
     }
 }
