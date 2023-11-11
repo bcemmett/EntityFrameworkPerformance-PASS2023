@@ -1,12 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Product } from '../models/Product';
 import { DataGrid, GridColDef, GridPaginationModel, GridSortDirection } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 interface ProductListProps{
     products: Product[];
     totalRowCount: number;
     onChangePage: (pageModel: GridPaginationModel) => void;
+}
+
+function RenderCellButton() {
+  return (
+    <strong>
+      <Button size="small" style={{ marginLeft: 16 }}>
+        Manage
+      </Button>
+    </strong>
+  );
 }
 
 export default function ProductList({products, totalRowCount, onChangePage}: ProductListProps) {
@@ -19,6 +29,7 @@ export default function ProductList({products, totalRowCount, onChangePage}: Pro
     {field: 'Description', headerName: 'Description', sortingOrder: ascendingSort, flex: 40},
     {field: 'Available', headerName: 'Available', sortingOrder: ascendingSort, flex: 40},
     {field: 'CurrentPrice', headerName: 'Price', sortingOrder: ascendingSort, flex: 40},
+    {field: 'x', headerName: '', sortingOrder: ascendingSort, flex: 40, renderCell: RenderCellButton},
   ]
 
   const pageSizeOptions = [100];
@@ -66,7 +77,7 @@ export default function ProductList({products, totalRowCount, onChangePage}: Pro
             },
           },
           sorting: {
-            sortModel: [{ field: 'Name', sort: 'desc' }],
+            sortModel: [{ field: 'Name', sort: 'asc' }],
           },
         }}
         density='compact'

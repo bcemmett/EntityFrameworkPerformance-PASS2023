@@ -39,7 +39,7 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
         public IEnumerable<Product> GetProducts([FromQuery] PageModel pageModel)
         {
             return _db.Products
-                .OrderBy(x => x.Id)
+                .OrderBy(x => x.Name)
                 .Skip(pageModel.PageSize * pageModel.Page)
                 .Take(pageModel.PageSize)
                 .ToList();
