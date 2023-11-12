@@ -5,6 +5,9 @@ import AccountList from './AccountList';
 import { AccountSearchModel } from '../models/AccountSearchModel';
 import { GridPaginationModel } from '@mui/x-data-grid';
 import AccountSummary from './AccountSummary';
+import { PaymentCard } from '../models/PaymentCard';
+import { Address } from '../models/Address';
+import AccountHistory from './AccountHistory';
 
 export default function AccountsTab() {
     const [account, setAccount] = useState<Account>();
@@ -12,6 +15,8 @@ export default function AccountsTab() {
     const [totalRowCount, setTotalRowCount] = useState<number>(81);
     const [email, setEmail] = useState<string>('');
     const [searchModel, setSearchModel] = useState<AccountSearchModel>({Name: '', City: ''});
+    const [paymentCards, setPaymentCards] = useState<PaymentCard[]>();
+    const [addresses, setAddresses] = useState<Address[]>();
 
     async function changePage(pageModel: GridPaginationModel){
         searchAccounts(pageModel);
@@ -20,6 +25,8 @@ export default function AccountsTab() {
     async function getAccountByEmail() {
         setAccounts(undefined);
         setAccount(undefined);
+        setPaymentCards(undefined);
+        setAddresses(undefined);
         const queryParams = new URLSearchParams({
             email: email,
         });
@@ -28,13 +35,35 @@ export default function AccountsTab() {
             const data = await response.json();
             setAccount(data);
         } else {
+            setAccounts(undefined);
             setAccount(undefined);
+            setPaymentCards(undefined);
+            setAddresses(undefined);
         }
     }
 
-    function loadAccountSearch(){
+    async function getAccountHistoryByEmail() {
+        setPaymentCards(undefined);
+        setAddresses(undefined);
+        const queryParams = new URLSearchParams({
+            email: email,
+        });
+        const response = await fetch('api/account/get-full-account-details-by-email?' + queryParams);
+        if(response.status === 200){
+            const data = await response.json();
+            setPaymentCards(data.PaymentCards);
+            setAddresses(data.Addresses);
+            console.log(addresses);
+            console.log(paymentCards);
+        } else {
+        }
+    }
+
+    function loadAccountSearch() {
         setAccounts([]);
         setAccount(undefined);
+        setPaymentCards(undefined);
+        setAddresses(undefined);
     }
 
     async function searchAccounts(pageModel: GridPaginationModel ) {
@@ -113,7 +142,14 @@ export default function AccountsTab() {
                     <Button onClick={loadAccountSearch} variant='contained' disabled={searchModel?.Name == '' && searchModel?.City == ''}>Search accounts</Button>
                 </Grid>
             </Grid>
-            {account && <AccountSummary account={account}/>}
+            <Grid container>
+                <Grid item xs={3}>
+                    {account && <AccountSummary account={account} onLoadHistory={getAccountHistoryByEmail}/>}
+                </Grid>
+                <Grid item xs={9}>
+                    {paymentCards && addresses && <AccountHistory addresses={addresses} paymentCards={paymentCards} />}
+                </Grid>
+            </Grid>
             {accounts && <AccountList accounts={accounts} totalRowCount={totalRowCount} onChangePage={changePage} />}
         </>
     );
