@@ -78,6 +78,7 @@ export default function AccountsTab() {
         setAccount(undefined);
         setPaymentCards(undefined);
         setAddresses(undefined);
+        setOrderHistory(undefined);
     }
 
     async function searchAccounts(pageModel: GridPaginationModel ) {
