@@ -16,5 +16,9 @@ namespace PizzaParadiseAdminWebsite.Server.DbModel
 
         [JsonIgnore]
         public virtual ICollection<Order>? Orders { get ;set; }
+        [JsonIgnore]
+        public virtual ICollection<Address>? Addresses { get ;set; }
+        [JsonIgnore]
+        public virtual ICollection<PaymentCard>? PaymentCards { get ;set; }
     }
 }
