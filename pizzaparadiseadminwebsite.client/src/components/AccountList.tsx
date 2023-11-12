@@ -7,32 +7,34 @@ interface AccountListProps{
     accounts: Account[];
     totalRowCount: number;
     onChangePage: (pageModel: GridPaginationModel) => void;
+    onLoadDetails: (account: Account) => void;
 }
 
-function RenderCellButton() {
-  return (
-    <strong>
-      <Button
-        size="small"
-        style={{ marginLeft: 16 }}
-      >
-        Load
-      </Button>
-    </strong>
-  );
-}
-
-export default function AccountList({accounts, totalRowCount, onChangePage}: AccountListProps) {
+export default function AccountList({accounts, totalRowCount, onChangePage, onLoadDetails}: AccountListProps) {
   const ascendingSort: GridSortDirection[] = ['asc', 'desc', null];
   const descendingSort: GridSortDirection[] = ['desc', 'asc', null];
 
+  function handleAccountLoad(e : React.MouseEvent<HTMLButtonElement, MouseEvent>, account: Account) {
+    onLoadDetails(account);
+  }
+  
+  function RenderCellButton(account: Account) {
+    return (
+      <strong>
+        <Button size="small" style={{ marginLeft: 16 }} onClick={p => handleAccountLoad(p, account)}>
+          Load
+        </Button>
+      </strong>
+    );
+  }
+ 
   const columns: GridColDef[] = [
     {field: 'Id', headerName: 'Id'},
     {field: 'Name', headerName: 'Name', sortingOrder: ascendingSort, flex: 20},
     {field: 'Email', headerName: 'Email', sortingOrder: ascendingSort, flex: 20},
     {field: 'City', headerName: 'City', sortingOrder: ascendingSort, flex: 20},
     {field: 'Phone', headerName: 'Phone', sortingOrder: ascendingSort, flex: 20},
-    {field: 'x', headerName: '', sortingOrder: ascendingSort, flex: 20, renderCell: RenderCellButton},
+    {field: 'x', headerName: '', sortingOrder: ascendingSort, flex: 20, renderCell: params => RenderCellButton(params.row)},
   ]
 
   const pageSizeOptions = [100];

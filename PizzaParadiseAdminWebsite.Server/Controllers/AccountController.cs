@@ -23,17 +23,17 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
         public IEnumerable<Account> Post([FromQuery] PageModel pageModel, [FromBody] AccountSearchModel searchModel)
         {
             return _db.Accounts
-                .OrderBy(x => x.Id)
                 .ToList()
                 .Where(x => (x.Name == searchModel.Name || String.IsNullOrWhiteSpace(searchModel.Name))
-                    && (x.City == searchModel.City || String.IsNullOrWhiteSpace(searchModel.City)));
+                    && (x.City == searchModel.City || String.IsNullOrWhiteSpace(searchModel.City)))
+                .OrderBy(x => x.Id);
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Account))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("get-by-email")]
-        public IActionResult Get(string email)
+        public IActionResult GetByEmail(string email)
         {
             var accounts = _db.Accounts
                 .Where(x => x.Email == email)
@@ -41,6 +41,22 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
 
             if(accounts.Any()){
                 return Ok(accounts.First());
+            } else {
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Account))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Route("get-by-id")]
+        public IActionResult GetById(int id)
+        {
+            var account = _db.Accounts
+                .FirstOrDefault(x => x.Id == id);
+
+            if(account != null){
+                return Ok(account);
             } else {
                 return NotFound();
             }

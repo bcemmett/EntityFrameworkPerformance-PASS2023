@@ -25,6 +25,12 @@ export default function AccountsTab() {
         searchAccounts(pageModel);
     }
 
+    async function loadAccountDetailsFromExistingModel(accountToLoad: Account) {
+        setAccount(accountToLoad);
+        setAccounts(undefined);
+        getAccountOrderHistoryById(accountToLoad.Id);
+    }
+
     async function getAccountByEmail() {
         setAccounts(undefined);
         setAccount(undefined);
@@ -58,12 +64,19 @@ export default function AccountsTab() {
         }
     }
 
-    async function getAccountOrderHistoryById() {
+    function getAccountOrderHistoryForCurrentlyLoadedModel() {
+        var id = account?.Id;
+        if(id) {
+            getAccountOrderHistoryById(id);
+        }
+    }
+
+    async function getAccountOrderHistoryById(accountId: number) {
         setPaymentCards(undefined);
         setAddresses(undefined);
         setOrderHistory(undefined);
         const queryParams = new URLSearchParams({
-            accountId: account?.Id?.toString() ?? '',
+            accountId: accountId.toString(),
         });
         const response = await fetch('api/orders/get-orders-by-account-id?' + queryParams);
         if(response.status === 200){
@@ -159,14 +172,14 @@ export default function AccountsTab() {
             </Grid>
             <Grid container>
                 <Grid item xs={3}>
-                    {account && <AccountSummary account={account} onLoadHistory={getAccountHistoryById} onLoadOrders={getAccountOrderHistoryById}/>}
+                    {account && <AccountSummary account={account} onLoadHistory={getAccountHistoryById} onLoadOrders={getAccountOrderHistoryForCurrentlyLoadedModel}/>}
                 </Grid>
                 <Grid item xs={9}>
                     {paymentCards && addresses && <AccountHistory addresses={addresses} paymentCards={paymentCards} />}
                     {orderHistory && <AccountOrdersHistoryList orders={orderHistory} />}
                 </Grid>
             </Grid>
-            {accounts && <AccountList accounts={accounts} totalRowCount={totalRowCount} onChangePage={changePage} />}
+            {accounts && <AccountList accounts={accounts} totalRowCount={totalRowCount} onChangePage={changePage} onLoadDetails={loadAccountDetailsFromExistingModel} />}
         </>
     );
 }

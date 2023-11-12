@@ -51,7 +51,7 @@ export default function AccountOrdersHistoryList({orders}: AccountOrdersHistoryL
             },
           },
           sorting: {
-            sortModel: [{ field: 'ExpiryDate', sort: 'desc' }],
+            sortModel: [{ field: 'TimeReceived', sort: 'desc' }],
           },
         }}
         density='compact'
