@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PizzaParadiseAdminWebsite.Server.DbModel;
 using PizzaParadiseAdminWebsite.Server.Dtos;
 
@@ -40,6 +41,32 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
 
             if(accounts.Any()){
                 return Ok(accounts.First());
+            } else {
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AccountHistoryDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Route("get-full-account-details-by-email")]
+        public IActionResult GetFullDetails(string email)
+        {
+            var account = _db.Accounts
+                .Where(a => a.Email == email)
+                .Include(a => a.PaymentCards)
+                .Include(a => a.Addresses)
+                .Select(a => new AccountHistoryDto
+                {
+                    Id = a.Id,
+                    Email = a.Email,
+                    PaymentCards = a.PaymentCards,
+                    Addresses = a.Addresses,
+                })
+                .FirstOrDefault();
+
+            if(account != null){
+                return Ok(account);
             } else {
                 return NotFound();
             }
