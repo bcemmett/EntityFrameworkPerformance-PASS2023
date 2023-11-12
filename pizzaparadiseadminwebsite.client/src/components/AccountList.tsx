@@ -80,7 +80,7 @@ export default function AccountList({accounts, totalRowCount, onChangePage}: Acc
             },
           },
           sorting: {
-            sortModel: [{ field: 'Name', sort: 'desc' }],
+            sortModel: [{ field: 'Name', sort: 'asc' }],
           },
         }}
         density='compact'
