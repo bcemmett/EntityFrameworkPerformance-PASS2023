@@ -8,6 +8,8 @@ import AccountSummary from './AccountSummary';
 import { PaymentCard } from '../models/PaymentCard';
 import { Address } from '../models/Address';
 import AccountHistory from './AccountHistory';
+import { Order } from '../models/Order';
+import AccountOrdersHistoryList from './AccountOrdersHistoryList';
 
 export default function AccountsTab() {
     const [account, setAccount] = useState<Account>();
@@ -17,6 +19,7 @@ export default function AccountsTab() {
     const [searchModel, setSearchModel] = useState<AccountSearchModel>({Name: '', City: ''});
     const [paymentCards, setPaymentCards] = useState<PaymentCard[]>();
     const [addresses, setAddresses] = useState<Address[]>();
+    const [orderHistory, setOrderHistory] = useState<Order[]>();
 
     async function changePage(pageModel: GridPaginationModel){
         searchAccounts(pageModel);
@@ -27,6 +30,7 @@ export default function AccountsTab() {
         setAccount(undefined);
         setPaymentCards(undefined);
         setAddresses(undefined);
+        setOrderHistory(undefined);
         const queryParams = new URLSearchParams({
             email: email,
         });
@@ -35,10 +39,6 @@ export default function AccountsTab() {
             const data = await response.json();
             setAccount(data);
         } else {
-            setAccounts(undefined);
-            setAccount(undefined);
-            setPaymentCards(undefined);
-            setAddresses(undefined);
         }
     }
 
@@ -53,8 +53,22 @@ export default function AccountsTab() {
             const data = await response.json();
             setPaymentCards(data.PaymentCards);
             setAddresses(data.Addresses);
-            console.log(addresses);
-            console.log(paymentCards);
+            setOrderHistory(undefined);
+        } else {
+        }
+    }
+
+    async function getAccountOrderHistoryById() {
+        setPaymentCards(undefined);
+        setAddresses(undefined);
+        setOrderHistory(undefined);
+        const queryParams = new URLSearchParams({
+            accountId: account?.Id?.toString() ?? '',
+        });
+        const response = await fetch('api/orders/get-orders-by-account-id?' + queryParams);
+        if(response.status === 200){
+            const data = await response.json();
+            setOrderHistory(data);
         } else {
         }
     }
@@ -144,10 +158,11 @@ export default function AccountsTab() {
             </Grid>
             <Grid container>
                 <Grid item xs={3}>
-                    {account && <AccountSummary account={account} onLoadHistory={getAccountHistoryByEmail}/>}
+                    {account && <AccountSummary account={account} onLoadHistory={getAccountHistoryByEmail} onLoadOrders={getAccountOrderHistoryById}/>}
                 </Grid>
                 <Grid item xs={9}>
                     {paymentCards && addresses && <AccountHistory addresses={addresses} paymentCards={paymentCards} />}
+                    {orderHistory && <AccountOrdersHistoryList orders={orderHistory} />}
                 </Grid>
             </Grid>
             {accounts && <AccountList accounts={accounts} totalRowCount={totalRowCount} onChangePage={changePage} />}

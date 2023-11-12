@@ -4,9 +4,10 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 interface AccountSummaryProps{
     account: Account;
     onLoadHistory: () => void;
+    onLoadOrders: () => void;
 }
 
-export default function AccountSummary({account, onLoadHistory}: AccountSummaryProps) {
+export default function AccountSummary({account, onLoadHistory, onLoadOrders}: AccountSummaryProps) {
   return (
     <>
       <Box sx={{width:'100%', paddingTop:3}}>
@@ -54,12 +55,16 @@ export default function AccountSummary({account, onLoadHistory}: AccountSummaryP
           </Grid>
         </Grid>
         <Grid container>
-          <Grid sx={{paddingTop:3}} item xs={5}>
+          <Grid sx={{paddingTop:3}} item xs={3}>
             <Button variant='contained' fullWidth>Admin view</Button>
           </Grid>
           <Grid sx={{paddingTop:3}} item xs={1} />
-          <Grid sx={{paddingTop:3}} item xs={5}>
+          <Grid sx={{paddingTop:3}} item xs={3}>
             <Button variant='contained' fullWidth onClick={onLoadHistory}>Load history</Button>
+          </Grid>
+          <Grid sx={{paddingTop:3}} item xs={1} />
+          <Grid sx={{paddingTop:3}} item xs={3}>
+            <Button variant='contained' fullWidth onClick={onLoadOrders}>View orders</Button>
           </Grid>
         </Grid>
       </Box>

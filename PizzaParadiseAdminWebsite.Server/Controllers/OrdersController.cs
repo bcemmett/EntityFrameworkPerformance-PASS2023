@@ -18,6 +18,15 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
         }
 
         [HttpGet]
+        [Route("get-orders-by-account-id")]
+        public IEnumerable<Order> GetOrdersByAccountId(int accountId)
+        {
+            return _db.Orders
+                .Where(x => x.AccountId == accountId)
+                .ToList();
+        }
+
+        [HttpGet]
         [Route("list-recent-orders")]
         public IEnumerable<object> GetRecentOrders([FromQuery] PageModel pageModel)
         {
