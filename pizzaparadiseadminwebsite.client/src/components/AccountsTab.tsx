@@ -42,13 +42,13 @@ export default function AccountsTab() {
         }
     }
 
-    async function getAccountHistoryByEmail() {
+    async function getAccountHistoryById() {
         setPaymentCards(undefined);
         setAddresses(undefined);
         const queryParams = new URLSearchParams({
-            email: email,
+            id: account?.Id?.toString() ?? '',
         });
-        const response = await fetch('api/account/get-full-account-details-by-email?' + queryParams);
+        const response = await fetch('api/account/get-full-account-details-by-id?' + queryParams);
         if(response.status === 200){
             const data = await response.json();
             setPaymentCards(data.PaymentCards);
@@ -158,7 +158,7 @@ export default function AccountsTab() {
             </Grid>
             <Grid container>
                 <Grid item xs={3}>
-                    {account && <AccountSummary account={account} onLoadHistory={getAccountHistoryByEmail} onLoadOrders={getAccountOrderHistoryById}/>}
+                    {account && <AccountSummary account={account} onLoadHistory={getAccountHistoryById} onLoadOrders={getAccountOrderHistoryById}/>}
                 </Grid>
                 <Grid item xs={9}>
                     {paymentCards && addresses && <AccountHistory addresses={addresses} paymentCards={paymentCards} />}

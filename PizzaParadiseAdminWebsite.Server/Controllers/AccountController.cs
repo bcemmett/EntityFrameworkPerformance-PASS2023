@@ -49,11 +49,11 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AccountHistoryDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Route("get-full-account-details-by-email")]
-        public IActionResult GetFullDetails(string email)
+        [Route("get-full-account-details-by-id")]
+        public IActionResult GetFullDetails(int id)
         {
             var account = _db.Accounts
-                .Where(a => a.Email == email)
+                .Where(a => a.Id == id)
                 .Include(a => a.PaymentCards)
                 .Include(a => a.Addresses)
                 .Select(a => new AccountHistoryDto
