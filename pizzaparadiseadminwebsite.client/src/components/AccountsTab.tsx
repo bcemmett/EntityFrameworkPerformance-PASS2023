@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import AccountDetails from './AccountDetails';
 import { Account } from '../models/Account';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import AccountList from './AccountList';
 import { AccountSearchModel } from '../models/AccountSearchModel';
 import { GridPaginationModel } from '@mui/x-data-grid';
+import AccountSummary from './AccountSummary';
 
 export default function AccountsTab() {
     const [account, setAccount] = useState<Account>();
@@ -113,7 +113,7 @@ export default function AccountsTab() {
                     <Button onClick={loadAccountSearch} variant='contained' disabled={searchModel?.Name == '' && searchModel?.City == ''}>Search accounts</Button>
                 </Grid>
             </Grid>
-            {account && <AccountDetails account={account}/>}
+            {account && <AccountSummary account={account}/>}
             {accounts && <AccountList accounts={accounts} totalRowCount={totalRowCount} onChangePage={changePage} />}
         </>
     );
