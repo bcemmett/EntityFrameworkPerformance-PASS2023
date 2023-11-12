@@ -2256,8 +2256,33 @@ Version:4.5.1.4009-->
   <PostScripts type="SQLScripts" version="1">
     <value version="1" type="SQLScript">
       <SQLScriptType>InternalSQLScript</SQLScriptType>
+      <Name>City to Seattle</Name>
+      <Script>UPDATE dbo.Accounts
+SET City = 'Tacoma'
+WHERE City = 'Seattle'
+UPDATE dbo.Accounts
+SET City = 'Seattle'
+WHERE Id IN
+      (
+          SELECT TOP 80 Id FROM dbo.Accounts ORDER BY RAND() ASC
+      )</Script>
+    </value>
+    <value version="1" type="SQLScript">
+      <SQLScriptType>InternalSQLScript</SQLScriptType>
       <Name>Account to ben</Name>
       <Script>UPDATE dbo.Accounts SET Email = 'ben@ben.com', Name = 'Ben Emmett', Address1 = 'Seattle Convention Center', Address2 = '705 Pike Street', City = 'Seattle', PostalCode = '98101', Phone = '+1 (123) 456 7890' WHERE Id = 1234</Script>
+    </value>
+    <value version="1" type="SQLScript">
+      <SQLScriptType>InternalSQLScript</SQLScriptType>
+      <Name>Update order timestamps</Name>
+      <Script>	  DECLARE @cnt INT = 0
+	  DECLARE @timestamp DATETIME = GETUTCDATE()
+	  DECLARE @maxId INT = (SELECT MAX(id) FROM dbo.Orders)
+	  WHILE(@cnt &lt; 300) BEGIN
+		UPDATE dbo.Orders SET TimeReceived = @timestamp WHERE Id = @maxId - @cnt;
+		SET @timestamp = DATEADD(SECOND, 0 - ROUND(RAND() * 300, 1), @timestamp);
+		SET @cnt = @cnt + 1;
+	  END</Script>
     </value>
   </PostScripts>
   <IsRefresh>False</IsRefresh>
