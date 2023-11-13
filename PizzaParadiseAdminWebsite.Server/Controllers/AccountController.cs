@@ -87,5 +87,15 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet]
+        [Route("search-by-location")]
+        public IEnumerable<Account> SearchByLocation(int miles, string zipCode)
+        {
+            return _db.Accounts
+                .AsEnumerable()
+                .Where(a => LocationService.IsInProximity(miles, zipCode, a.PostalCode))
+                .OrderBy(a => a.Id);
+        }
     }
 }
