@@ -7,4 +7,5 @@ export interface Account {
     PostalCode: string;
     City: string;
     Phone: string;
+    MostRecentActivity: Date;
 }

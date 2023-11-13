@@ -4,7 +4,7 @@ namespace PizzaParadiseAdminWebsite.Server
     {
         public static bool IsInProximity(int miles, string zipCode1, string zipCode2)
         {
-            return new Random().Next(1, 100000) == 1;
+            return new Random().Next(1, 8000) == 1;
         }
     }
 }

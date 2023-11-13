@@ -93,6 +93,7 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
         public IEnumerable<Account> SearchByLocation(int miles, string zipCode)
         {
             return _db.Accounts
+                .Where(a => a.MostRecentActivity > DateTime.UtcNow.AddYears(-1))
                 .AsEnumerable()
                 .Where(a => LocationService.IsInProximity(miles, zipCode, a.PostalCode))
                 .OrderBy(a => a.Id);
