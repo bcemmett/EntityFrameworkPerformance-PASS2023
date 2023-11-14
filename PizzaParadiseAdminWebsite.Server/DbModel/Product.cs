@@ -8,6 +8,7 @@ namespace PizzaParadiseAdminWebsite.Server.DbModel
         public string? Name { get; set; }
         public string? Description { get; set; }
         public decimal CurrentPrice { get; set; }
+        public decimal? SpecialPrice { get; set; }
         public bool Available { get; set; }
         public int CategoryId { get; set; }
         public byte[]? Photo { get; set; }

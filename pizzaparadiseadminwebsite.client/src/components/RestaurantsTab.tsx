@@ -8,7 +8,6 @@ import AccountList from './AccountList';
 export default function RestaurantsTab() {
     const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
     const [totalRowCount, setTotalRowCount] = useState<number>(62);
-    const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant>();
     const [accounts, setAccounts] = useState<Account[]>();
     const [showRestaurants, setShowRestaurants] = useState<boolean>(true);
 
@@ -32,7 +31,6 @@ export default function RestaurantsTab() {
             miles: '20',
             zipCode: restaurant.PostalCode,
         });
-        console.log(restaurant);
         const response = await fetch('api/account/search-by-location?' + queryParams);
         const data = await response.json();
         setAccounts(data);

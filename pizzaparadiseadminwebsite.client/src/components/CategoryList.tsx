@@ -1,22 +1,38 @@
 import { useState, useEffect } from 'react';
 import { Category } from '../models/Category';
 import { DataGrid, GridColDef, GridPaginationModel, GridSortDirection } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 interface CategoryListProps{
     categories: Category[];
     totalRowCount: number;
     onChangePage: (pageModel: GridPaginationModel) => void;
+    onApplySpotDiscount: (category: Category) => void;
 }
 
-export default function CategoryList({categories, totalRowCount, onChangePage}: CategoryListProps) {
+export default function CategoryList({categories, totalRowCount, onChangePage, onApplySpotDiscount}: CategoryListProps) {
   const ascendingSort: GridSortDirection[] = ['asc', 'desc', null];
   const descendingSort: GridSortDirection[] = ['desc', 'asc', null];
+
+  function handleSpotDiscount(e : React.MouseEvent<HTMLButtonElement, MouseEvent>, category: Category) {
+    onApplySpotDiscount(category);
+  }
+  
+  function RenderCellButton(category: Category) {
+    return (
+      <strong>
+        <Button size="small" style={{ marginLeft: 16 }} onClick={p => handleSpotDiscount(p, category)}>
+          Apply spot discount
+        </Button>
+      </strong>
+    );
+  }
 
   const columns: GridColDef[] = [
     {field: 'Id', headerName: 'Id'},
     {field: 'Name', headerName: 'Category', sortingOrder: ascendingSort, flex: 20},
     {field: 'ProductCount', headerName: 'Products', sortingOrder: ascendingSort, flex: 40},
+    {field: 'x', headerName: '', sortingOrder: ascendingSort, flex: 20, renderCell: params => RenderCellButton(params.row)},
   ]
 
   const pageSizeOptions = [10, 20];

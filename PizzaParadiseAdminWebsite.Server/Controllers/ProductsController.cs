@@ -44,5 +44,20 @@ namespace PizzaParadiseAdminWebsite.Server.Controllers
                 .Take(pageModel.PageSize)
                 .ToList();
         }
+
+        [HttpGet]
+        [Route("apply-spot-discount-to-category")]
+        public void MarkAvailability(int categoryId)
+        {
+            var products = _db.Products
+                .Where(x => x.CategoryId == categoryId);
+            
+            foreach(var product in products)
+            {
+                product.SpecialPrice = product.CurrentPrice * 0.9m;
+            }
+
+            _db.SaveChanges();
+        }
     }
 }

@@ -45,6 +45,14 @@ export default function ProductsTab() {
         setCategoriesOrProducts(e.target.value);
     }
 
+    async function applySpotDiscount(category: Category) {
+        const queryParams = new URLSearchParams({
+            categoryId: category.Id.toString(),
+        });
+        const response = await fetch('api/products/apply-spot-discount-to-category?' + queryParams);
+        await response.text();
+    }
+
     return (
         <>
          <FormControl>
@@ -53,7 +61,7 @@ export default function ProductsTab() {
                 <FormControlLabel value="products" control={<Radio />} label="Products" />
             </RadioGroup>
           </FormControl>
-          {categoriesOrProducts == 'categories' && <CategoryList categories={categories} totalRowCount={totalCategoriesRowCount} onChangePage={changeCategoriesPage} />}
+          {categoriesOrProducts == 'categories' && <CategoryList categories={categories} totalRowCount={totalCategoriesRowCount} onChangePage={changeCategoriesPage} onApplySpotDiscount={applySpotDiscount} />}
           {categoriesOrProducts == 'products' && <ProductList products={products} totalRowCount={totalProductsRowCount} onChangePage={changeProductsPage} />}
         </>
     );
