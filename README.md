@@ -16,3 +16,9 @@ The data retrieval approaches used in the api layer demonstrate a range of perfo
 - Run `dotnet run` to build and run the application.
 - As well as launching the api layer, this will run the front end. The front end is accessible by default at https://localhost:5173. The back end runs by default on port 7296.
 - To benefit from hot reload for both the .NET application and the UI simultaneously requires manually running those processes individually. To achieve this, use 2 separate terminal windows. In the first, switch directory to `PizzaParadiseAdminWebsite.Server` and run `dotnet watch run`. In the second, switch directory to `pizzaparadiseadminwebsite.client` and run `npm run dev` (node must first be installed).
+
+## Further resources
+- [MVC mini profiler](https://miniprofiler.com) is a great way to gain visibility right in the browser.
+- [EF Core documentation](https://learn.microsoft.com/en-us/ef/core/performance/) has guidance on performance.
+- Redgate's [Test Data Manager](https://www.red-gate.com/solutions/test-data-management) can help engineering teams work with Entity Framework against realistic test data.
+- Redgate's [SQL Monitor](https://www.red-gate.com/solutions/monitor) can help DBAs understand performance, and provide access to that data to developers.
