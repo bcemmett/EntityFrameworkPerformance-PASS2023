@@ -12,7 +12,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AdminWebsiteDbContext>(options =>
-  options.UseSqlServer(builder.Configuration.GetConnectionString("AdminWebsiteContext")));
+  options.UseSqlServer(
+    builder.Configuration.GetConnectionString("AdminWebsiteContext"),
+    sqlServerOptions =>
+        sqlServerOptions.CommandTimeout(120)
+  ));
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
